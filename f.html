@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information Application with Routing</title>
+    <style>
+        .container {
+            border: 1px solid #e3e3e3;
+            padding: 15px;
+            font-family: Arial, sans-serif;
+        }
+        .nav-bar {
+            background-color: #fcf8e3;
+            padding: 10px;
+            text-align: center;
+            font-weight: bold;
+        }
+        .nav-bar a {
+            margin-right: 20px;
+            text-decoration: none;
+            color: purple;
+            font-weight: bold;
+        }
+        .content {
+            padding: 20px;
+            min-height: 200px;
+        }
+        .student-data {
+            background-color: #d9edf7;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .subjects {
+            background-color: #dff0d8;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        .labs {
+            background-color: #f2dede;
+            padding: 10px;
+            border-radius: 5px;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+        }
+    </style>
+</head>
+<body ng-app="studentApp">
+
+    <div class="container">
+        <div class="nav-bar">
+            Student Information Application with Routing
+            <a href="#!studentData">StudentData</a>
+            <a href="#!subjects">Subjects</a>
+            <a href="#!labs">Labs</a>
+        </div>
+
+        <div class="content" ng-view></div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular-route.js"></script>
+
+    <script>
+        var app = angular.module("studentApp", ["ngRoute"]);
+
+        app.config(function($routeProvider) {
+            $routeProvider
+            .when("/studentData", {
+                template: `
+                <div class="student-data">
+                    <h3>Personal Data</h3>
+                    <ul>
+                        <li>Student Roll No</li>
+                        <li>Student Name</li>
+                        <li>Address</li>
+                        <li>Mail-id</li>
+                    </ul>
+                </div>`
+            })
+            .when("/subjects", {
+                template: `
+                <div class="subjects">
+                    <h3>Subjects with unordered list</h3>
+                    <ul>
+                        <li>ACD</li>
+                        <li>DL</li>
+                        <li>DWDM</li>
+                        <li>FSD</li>
+                        <li>LP</li>
+                        <li>SFD</li>
+                    </ul>
+                </div>`
+            })
+            .when("/labs", {
+                template: `
+                <div class="labs">
+                    <h3>Labs with unordered list</h3>
+                    <ul>
+                        <li>FSD LAB</li>
+                        <li>DL LAB</li>
+                    </ul>
+                </div>`
+            })
+            .otherwise({
+                redirectTo: "/studentData"
+            });
+        });
+    </script>
+</body>
+</html>
